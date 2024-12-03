@@ -1,0 +1,310 @@
+classDiagram
+    class INhap {
+        <<interface>>
+        +nhapThongTin()
+    }
+    class IXuat {
+        <<interface>>
+        +xuatThongTin()
+    }
+    class HoaDon {
+        <<abstract>>
+        -maHoaDon: int
+        -ngayLapHoaDon: String
+        -tongTien: double
+        +nhapThongTin()
+        +xuatThongTin()
+        +suaThongTin()
+        +nhapKhachHang()
+    }
+    class HoaDonNhap {
+        -hinhThucThanhToan: String
+        -chietKhau: double
+        -giamGia: double
+        -thueGiaTri: double
+        +nhapThongTin()
+        +xuatThongTin()
+    }
+    class HoaDonBan {
+        -hinhThucThanhToan: String
+        -giamGia: double
+        -thueGiaTri: double
+        +nhapThongTin()
+        +xuatThongTin()
+    }
+    class hoaDonChiTiet {
+        -soluongmua: int
+        -maSanPham: int
+        -tenSanPham: String
+        -giaBan: double
+        +tinhTongTien(): double
+    }
+    class Danhsachhđ {
+        -danhsachhoadon: ArrayList<HoaDon>
+        +xemThongTin()
+        +themThongTin()
+        +suaThongTin()
+        +xoaThongTin()
+        +timKiemThongTin()
+        +tinhThueVAT()
+        +taiDSTuFile()
+        +xuatDSRaFile()
+    }
+    class KhachHang {
+        <<interface>>
+        +nhapThongTin()
+        +suaThongTin()
+    }
+    class KhachHangBinhThuong {
+        +nhapThongTin()
+        +suaThongTin()
+    }
+    class KhachHangVipPro {
+        +nhapThongTin()
+        +suaThongTin()
+    }
+    class SanPham {
+        <<interface>>
+    }
+    class Phukienoto {
+    }
+    class Phukienxemay {
+    }
+    class NhanVien {
+        <<interface>>
+    }
+    class NhanVienBanHang {
+    }
+    class NhanVienQLy {
+    }
+    class NhaCungCap {
+    }
+
+    HoaDon <|-- HoaDonNhap
+    HoaDon <|-- HoaDonBan
+    HoaDon : +getKhachHang()
+    HoaDon : +getSanPham()
+    HoaDon : +getNhanVien()
+    HoaDon ..|> INhap
+    HoaDon ..|> IXuat
+    HoaDonNhap ..|> INhap
+    HoaDonNhap ..|> IXuat
+    HoaDonBan ..|> INhap
+    HoaDonBan ..|> IXuat
+
+    Danhsachhđ o-- "0..*" HoaDon : manages
+
+    HoaDon o-- KhachHang
+    HoaDon o-- SanPham
+    HoaDon o-- NhanVien
+    HoaDon o-- hoaDonChiTiet
+
+    KhachHang <|.. KhachHangBinhThuong
+    KhachHang <|.. KhachHangVipPro
+
+    SanPham <|.. Phukienoto
+    SanPham <|.. Phukienxemay
+
+    NhanVien <|.. NhanVienBanHang
+    NhanVien <|.. NhanVienQLy
+
+    hoaDonChiTiet o-- SanPham
+       class SanPham {
+        -int maSanPham
+        -int soLuongTon
+        -int soLuongNhap
+        -double giaBan
+        -double giaNhap
+        -String tenSanPham
+        -NhaCungCap nhaCungCap
+        +nhapThongTin()
+        +xuatThongTin()
+        +suaThongTin()
+    }
+
+    class Phukienoto {
+        -String loaiXe
+        -int ngaySX
+        -int hanSuDung
+        -double khoiLuong
+        -double tinhThueVAT
+        -String mauSac
+        -String chatLieu
+        -String hangSanXuat
+        -String loaiPhuKien
+    }
+
+    class Phukienxemay {
+        -String loaiXe
+        -int ngaySX
+        -int hanSuDung
+        -double khoiLuong
+        -double tinhThueVAT
+        -String mauSac
+        -String chatLieu
+        -String hangSanXuat
+        -String loaiPhuKien
+    }
+
+    class NhaCungCap {
+        -int maNhaCungCap
+        -String tenNhaCungCap
+        -String diaChi
+        -String soDienThoai
+    }
+
+    class Danhsachsp {
+        -ArrayList~SanPham~ danhssp
+        +themThongTin()
+        +suaThongTin()
+        +xoaThongTin()
+        +timKiemThongTin()
+        +taiDanhSachTuFile()
+        +xuatDanhSachRaFile()
+    }
+
+    class Danhsachncc {
+        -ArrayList~NhaCungCap~ danhsncc
+        +taiDSTuFile()
+    }
+
+    class QlySanPham {
+        -Danhsachsp dssp
+        -Danhsachncc danhsachncc
+        +menu()
+    }
+ class NhaCungCap {
+        +int maNhaCungCap
+        +String tenNhaCungCap
+        +String diaChi
+        +long soDienThoai
+        +void nhapThongTin()
+        +void xuatThongTin()
+        +void suaThongTin()
+    }
+
+    class INhap {
+        +void nhapThongTin()
+    }
+
+    class IXuat {
+        +void xuatThongTin()
+    }
+
+    class NhaCungCapTrongNuoc {
+        +String vungMienDaiLy
+        +long maSoThue
+        +long taiKhoanNganHang
+        +String giayPhepKinhDoanh
+        +boolean daCungCapTruoc
+        +int soLanHopTac
+        +String danhGiaMucDoTinCay()
+    }
+
+    class NhaCungCapNgoaiNuoc {
+        +String quocGia
+        +long maSoThue
+        +long taiKhoanNganHang
+        +String maSwift
+        +double tyGiaHoiDoai
+        +String loaiTienTe
+        +double chuyenDoiTienTe()
+    }
+
+    class QlyNhaCungCap {
+        -Danhsachncc dsncc
+        +void menu()
+    }
+
+    class Danhsachncc {
+        -ArrayList~NhaCungCap~ danhsncc
+        +void themThongTin()
+        +void suaThongTin()
+        +void xoaThongTin()
+        +void timKiemThongTin()
+        +void taiDSTuFile()
+        +void xuatDSRaFile()
+    }
+
+    NhaCungCap <|-- NhaCungCapTrongNuoc
+    NhaCungCap <|-- NhaCungCapNgoaiNuoc
+    NhaCungCap : +void suaThongTin()
+
+    NhaCungCapTrongNuoc ..|> INhap
+    NhaCungCapTrongNuoc ..|> IXuat
+
+    NhaCungCapNgoaiNuoc ..|> INhap
+    NhaCungCapNgoaiNuoc ..|> IXuat
+
+    QlyNhaCungCap o-- Danhsachncc
+    Danhsachncc o-- "0..*" NhaCungCap
+    class KhachHang {
+        <<abstract>>
+        -int maKhachHang
+        -String hoTenKhachHang
+        -String phaikh
+        -long sdtKhachHang
+        -String email
+        +KhachHang()
+        +KhachHang(maKhachHang, hoTenKhachHang, phaikh, sdtKhachHang, email)
+        +getters/setters()
+        +nhapThongTin()
+        +xuatThongTin()
+        +suaThongTin()
+        +toString()
+    }
+
+    class KhachHangBinhThuong {
+        -double tongChiTieu
+        -int soLanMuaHang
+        +KhachHangBinhThuong()
+        +KhachHangBinhThuong(maKhachHang, sdtKhachHang, hoTenKhachHang, phaikh, email, soLanMuaHang, tongChiTieu)
+        +getters/setters()
+        +kiemTraDieuKien()
+        +nhapThongTin()
+        +xuatThongTin()
+    }
+
+    class KhachHangVipPro {
+        -double tongChiTieu
+        -int soLanMuaHang
+        -double mucUuDai
+        -String capDoUuDai
+        +KhachHangVipPro()
+        +KhachHangVipPro(maKhachHang, sdtKhachHang, hoTenKhachHang, phaikh, email, soLanMuaHang, tongChiTieu, mucUuDai, capDoUuDai)
+        +getters/setters()
+        -xacDinhCapDoUuDai()
+        +tinhGiaTriUuDai(tongTien)
+        +nhapThongTin()
+        +xuatThongTin()
+    }
+
+    class Danhsachkh {
+        -ArrayList<KhachHang> danhskh
+        -static int makhtieptheo
+        +Danhsachkh()
+        +getters/setters()
+        +xemThongTin()
+        +themThongTin()
+        +suaThongTin()
+        +xoaThongTin()
+        +timKiemThongTin()
+        +taiDSTuFile(fileName)
+        +xuatDSRaFile(fileName)
+        +timKiemKhachHangTheoMa(maKhachHang)
+    }
+
+    class QlyKhachHang {
+        -Danhsachkh dskh
+        +QlyKhachHang()
+        +menu()
+    }
+
+
+
+    KhachHang ..|> INhap
+    KhachHang ..|> IXuat
+    KhachHangBinhThuong --|> KhachHang
+    KhachHangVipPro --|> KhachHang
+    QlyKhachHang *-- Danhsachkh
+    Danhsachkh o-- KhachHang
